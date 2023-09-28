@@ -3,20 +3,34 @@
 # Если такого нет, то выведите первый элемент.
 # Преобразовать список так, чтобы сначала шли нулевые элементы, а затем все остальные.
 
+def check(s):
+    while True:
+        try:
+            ii = int(input(s))
+        except ValueError:
+            print("Введите целое число!")
+        else:
+            return ii
+
 
 print("Задание №3\n")
-amount_of_elements = int(input("Введите количество элементов спиcка: "))
+while True:
+    amount_of_elements = check("Введите количество элементов спиcка: ")
+    if amount_of_elements < 1:
+        print("!?")
+    else:
+        break
 quantity = 0
 list_of_numbers = []
 while quantity != amount_of_elements:
     quantity += 1
-    in_element = int(input("Элемент {} : ".format(quantity)))
+    in_element = check("Элемент {} : ".format(quantity))
     list_of_numbers.append(in_element)
 print("Ваш список: ", list_of_numbers)
 new_list = []
 for element in list_of_numbers:
     next_element = element
-    if next_element % 2 == 0 and next_element != 0:
+    if next_element % 2 == 0:
         new_list.append(next_element)
 if len(new_list) != 0:
     print("Чётные элементы: ", new_list)
@@ -27,7 +41,7 @@ if len(new_list) != 0:
             min = new_next
     print("Min = ", min)
 else:
-    print("First = ", list_of_numbers[0])
+    print("Первый = ", list_of_numbers[0])
 for index in range(len(list_of_numbers)):
     if list_of_numbers[index] == 0:
         list_of_numbers.pop(index)
