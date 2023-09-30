@@ -13,9 +13,35 @@
 #   6. До свидания
 
 
+def check(s):
+    while True:
+        try:
+            ii = int(input(s))
+        except ValueError:
+            print("Введите целое число!")
+        else:
+            return ii
+
+
+def check_key(s):
+    while True:
+        try:
+            kk = input(s)
+            data[kk]
+        except KeyError:
+            print("!?")
+        else:
+            return kk
+
+
 def f():
-    for d_ in data:
-        print(d_, ' - ', data[d_])
+    print("Асортимент магазина:\n" +
+          "Название - состав - цена (р) - количество (шт)\n" +
+          "--------------------------------------------------")
+    for key, value in data.items():
+        print(key, ':', ' - '.join(([str(i) for i in value])))
+    # for el in data:
+    #     print(el, ' - ', data[el])
 
 
 def c(n, k):
@@ -24,26 +50,36 @@ def c(n, k):
 
 
 print("Задание №5")
-data = {"name_1": ["123", 3, 5],
-        "name_2": ['2', 4, 6],
-        "name_3": ['3', 5, 7]}
+data = {"Медведь": ["Синтепон, шерсть", 54, 10],
+        "Мяч": ['Полиуретан, воздух', 10, 20],
+        "Пазлы": ['Картон, красители', 22, 14]}
 while True:
     print()
-    print("1. Просмотр описания: название – описание\n" +
+    print("**********************************************\n"
+          "1. Просмотр описания: название – описание\n" +
           "2. Просмотр цены: название – цена\n" +
           "3. Просмотр количества: название – количество\n" +
           "4. Всю информацию\n" +
           "5. Покупка\n" +
-          "6. До свидания")
-    i = int(input("- "))
+          "6. До свидания\n"+
+          "**********************************************")
+    while True:
+        i = check("- ")
+        if i < 1 or i > 6:
+            print("Такого пункта нет. Повторите ввод")
+        else:
+            break
     print()
     if 1 <= i <= 3:
         if i == 1:
-            print("название – описание")
+            print("Название – описание\n"+
+                  "---------------------")
         elif i == 2:
-            print("название – цена")
+            print("Название – цена (р)\n"+
+                  "---------------------")
         elif i == 3:
-            print("название – количество")
+            print("Название – количество (шт)\n"+
+                  "---------------------")
         for d in data:
             print(d, ' - ', data[d][i - 1])
     elif i == 4:
@@ -51,11 +87,33 @@ while True:
     elif i == 5:
         f()
         print()
-        key_ = input("Введите название: ")
-        num = int(input("Введите количество: "))
-        data[key_][2] = data[key_][2] - num
-        print("Цена: ", c(num, key_))
-        print("Остаток: ", data[key_][2])
+        while True:
+            key_ = check_key("Введите название: ")
+            if data[key_][2] == 0:
+                print("Закончились(")
+                break
+            else:
+                while True:
+                    num = check("Введите количество: ")
+                    if num < 0 or num > data[key_][2]:
+                        print("!?")
+                    else:
+                        break
+                print("--------------------")
+                data[key_][2] = data[key_][2] - num
+                print("Цена: ", c(num, key_), "р")
+                print("Остаток: ", data[key_][2], "шт")
+                break
     elif i == 6:
+        print(" " * 7 + "Good Mye!!!!!")
+        print("""
+        ／＞　    フ
+　　　　　| 　_　 _|
+　 　　　／`ミ _x 彡
+　　 　 /　　　 　 |
+　　　 /　 ヽ　　 ﾉ
+　／￣|　　 |　|　|
+　| (￣ヽ＿_ヽ_)_)
+　＼二つ
+""")
         exit()
-
