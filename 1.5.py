@@ -26,7 +26,8 @@ def check(s):
 def check_key(s):
     while True:
         try:
-            kk = input(s)
+            kk = (input(s)).capitalize()
+            kk = kk.replace(' ', '')
             data[kk]
         except KeyError:
             print("!?")
@@ -89,6 +90,7 @@ while True:
         print()
         while True:
             key_ = check_key("Введите название: ")
+            print("(%s)" % key_)
             if data[key_][2] == 0:
                 print("Закончились(")
                 break
